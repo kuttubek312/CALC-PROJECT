@@ -12,6 +12,7 @@ public class Main {
        Scanner scn = new Scanner(System.in);
        System.out.print("Введите выражение: ");
        String exp = scn.nextLine();
+
        int actionIndex = -1;
        for (int i = 0; i < actions.length; i++) {
            if (exp.contains(actions[i])) {
@@ -36,7 +37,7 @@ public class Main {
 
                } else {
 
-                   a = Integer.parseInt(data[0]);   // переделать надо от 1 до 10
+                   a = Integer.parseInt(data[0]);
                    b = Integer.parseInt(data[1]);
                }
                checkNumber(a);
@@ -52,17 +53,17 @@ public class Main {
                    case "*":
                        result = a * b;
                        break;
-                   default:
+                   case "/":
                        result = a / b;
                        break;
+                   default: throw new IllegalArgumentException("оператор не найден!");
                }
-
                if (isRoman) {
                    System.out.println(converter.intToRoman(result));
                } else {
                    System.out.println(result);
                }
-           } catch (MyNumberFormatException | StringIndexOutOfBoundsException e) {
+           } catch (MyNumberFormatException | StringIndexOutOfBoundsException | IllegalArgumentException e) {
                System.out.println(e.getMessage());
            }
 
@@ -75,7 +76,7 @@ public class Main {
 
     public static void checkNumber(int number) throws MyNumberFormatException {
         if (number > 10 || number <= 0) {
-            throw new MyNumberFormatException("Неправильный формат: на ноль делить нельзя брат");
+            throw new MyNumberFormatException("Неправильный формат: на ноль делить нельзя");
         }
     }
 }
